@@ -1,3 +1,13 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/category/{{book.categoryId.slug}}">{{book.categoryId.name}}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">{{book.title}}</li>
+    </ol>
+</nav>
+
+
 <article id="book-detail" class="book-detail">
     <div class="detail-header">
 
@@ -5,34 +15,28 @@
         <div class="meta">
             <h1 id="book-title">{{book.title}}</h1>
             <div class="meta-grid">
-                <div><span class="label">Tác giả: </span><span id="book-author" class="value">{{book.author}}</span>
+                <div><span class="label">Author: </span><span id="book-author" class="value">{{book.author}}</span>
                 </div>
-                <div><span class="label">Thể loại: </span><a id="book-genre" class="chip">{{book.categoryId.name}}</a>
+                <div><span class="label">Genre: </span><a id="book-genre" class="chip">{{book.categoryId.name}}</a>
                 </div>
-                <div><span class="label">Xuất bản: </span><span id="book-date"
-                        class="value">{{book.publishedDateVN}}</span></div>
+                <div><span class="label">Published: </span><span id="book-year"
+                        class="value">{{book.publishedYear}}</span></div>
             </div>
             <p id="book-desc" class="desc"></p>
             <div>
-                <div style="display: flex;align-items: center;justify-content: space-between;">
-                    <h3> - Mô tả: </h3>
-                    <button id="btn-summarize" style="margin-left: 12px;" data-slug="{{book.slug}}" class="btn">Mô tả bằng AI</button>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <h3>- Description: </h3>
+                    <button id="btn-summarize" style="margin-left: 12px;" data-slug="{{book.slug}}" class="btn">AI
+                        Summary</button>
                 </div>
-                {{!-- <p id="book-review" class="review">
-                    {{#if book.description}}
-                    {{book.description}}
-                    {{else}}
-                    Đang cập nhật...
-                    {{/if}}
-                </p> --}}
 
                 <p id="ai-summary" class="ai-summary muted"></p>
-                <h3> - Cảm nhận:</h3>
+                <h3> - Impressions:</h3>
                 <p id="book-review" class="review">
                     {{#if book.review}}
                     {{book.review}}
                     {{else}}
-                    Đang cập nhật...
+                    Updating...
                     {{/if}}
                 </p>
             </div>
@@ -43,7 +47,8 @@
 {{#if relatedBooks.length}}
 <section class="section">
     <div class="section-head">
-        <h2>Cùng thể loại</h2>
+        <h2>Similar Genres</h2>
+
     </div>
     <div id="related-list" class="book-row">
 

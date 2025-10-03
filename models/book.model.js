@@ -11,8 +11,7 @@ const bookSchema = new Schema({
     slug: { type: String, unique: true, index: true },
 
     author: { type: String, default: 'Chưa xác định', trim: true },
-    publishedDate: { type: Date, default: null },
-
+    publishedYear: { type: Number, default: null },
     coverImage: { type: String, default: null }, // ảnh bìa sách
     description: { type: String, default: null, trim: true }, // mô tả ngắn về sách
     review: { type: String, default: null }, // cảm nhận cá nhân

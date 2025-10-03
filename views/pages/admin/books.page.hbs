@@ -15,7 +15,7 @@
                     <th>Ảnh bìa</th>
                     <th class="table-title">Tên sách</th>
                     <th class="table-author">Tác giả</th>
-                    <th class="table-published-date">Ngày xuất bản</th>
+                    <th class="table-published-date">Năm xuất bản</th>
                     <th class="table-category">Thể loại</th>
                     {{!-- <th>Trạng thái</th> --}}
                     <th class="table-status">
@@ -44,7 +44,7 @@
                     </td>
                     <td class="table-title">{{this.title}}</td>
                     <td class="table-author">{{this.author}}</td>
-                    <td class="table-published-date">{{formatDate this.publishedDate}}</td>
+                    <td class="table-published-date">{{this.publishedYear}}</td>
                     <td class="table-category">{{this.categoryId.name}}</td>
                     {{!-- <td>
                         {{#if this.isPublic}}
@@ -151,12 +151,18 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="bookPublishedYear" class="form-label">Năm xuất bản <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="bookPublishedYear" name="publishedYear">
+                        </div>
+
+                        {{!-- <div class="mb-3">
                             <label for="bookPublishedDate" class="form-label">
                                 Ngày xuất bản
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="date" class="form-control" id="bookPublishedDate" name="publishedDate">
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
                             <label for="bookCategory" class="form-label">Thể loại <span
@@ -179,11 +185,11 @@
                                 style="max-width: 200px; display: none; border-radius: 16px;">
                         </div>
 
-
+{{!-- 
                         <div class="mb-3">
                             <label for="bookDescription" class="form-label">Mô tả</label>
                             <textarea class="form-control" id="bookDescription" name="description" rows="5"></textarea>
-                        </div>
+                        </div> --}}
 
                         <!-- Cảm nhận -->
                         <div class="mb-3">
@@ -226,10 +232,16 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="editBookPublishedYear" class="form-label">Năm xuất bản <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="editBookPublishedYear" name="publishedYear">
+                        </div>
+
+                        {{!-- <div class="mb-3">
                             <label for="editBookPublishedDate" class="form-label">Ngày xuất bản <span
                                     class="text-danger">*</span></label>
                             <input type="date" class="form-control" id="editBookPublishedDate" name="publishedDate">
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
                             <label for="editBookCategory" class="form-label">Thể loại <span
@@ -251,11 +263,11 @@
                                 style="max-width: 200px; max-height: 200px; display: none; border-radius: 16px;">
                         </div>
 
-                        <div class="mb-3">
+                        {{!-- <div class="mb-3">
                             <label for="editBookDescription" class="form-label">Mô tả</label>
                             <textarea class="form-control" id="editBookDescription" name="description"
                                 rows="5"></textarea>
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
                             <label for="editBookReview" class="form-label">Cảm nhận</label>

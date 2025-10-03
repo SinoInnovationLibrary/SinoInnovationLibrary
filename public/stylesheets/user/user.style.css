@@ -223,13 +223,11 @@ body {
 
 .book-strip {
   display: grid;
-  grid-auto-flow: column;
-  /* grid-auto-columns: 160px; */
+  grid-template-columns: repeat(5, 1fr);
   gap: 12px;
   overflow-x: auto;
   padding-bottom: 6px
 }
-
 .book-card {
   color: white;
   position: relative;
@@ -285,19 +283,22 @@ body {
 }
 
 @media (max-width:1200px) {
-  .book-grid {
+  .book-grid,
+  .book-strip {
     grid-template-columns: repeat(4, 1fr)
   }
 }
 
 @media (max-width:900px) {
-  .book-grid {
+  .book-grid,
+  .book-strip {
     grid-template-columns: repeat(3, 1fr)
   }
 }
 
 @media (max-width:640px) {
-  .book-grid {
+  .book-grid,
+  .book-strip {
     grid-template-columns: repeat(2, 1fr)
   }
 }
@@ -405,4 +406,227 @@ body {
 /* utility */
 .hidden {
   display: none !important
+}
+
+
+
+
+
+/* .breadcrumb {
+  background-color: transparent;
+  padding: 12px 0;
+  margin: 0;
+}
+
+.breadcrumb-item a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+  color: var(--green);
+}
+
+.breadcrumb-item.active {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+  content: "›";
+  color: var(--text);
+} */
+.breadcrumb {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  background-color: transparent;
+  padding: 12px 0;
+  margin: 0;
+}
+
+.breadcrumb-item {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.breadcrumb-item:first-child {
+  flex: 0 0 auto;
+}
+
+.breadcrumb-item:nth-child(2),
+.breadcrumb-item:nth-child(3) {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.breadcrumb-item a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "›";
+  color: var(--text);
+  margin: 0 4px;
+}
+
+
+
+
+
+
+
+
+
+.fun-section {
+  background-color: var(--card);
+  color: var(--text);
+  padding: 60px 20px;
+  border-radius: 16px;
+  margin: 60px 0;
+  text-align: center;
+}
+
+.fun-section h2 {
+  color: var(--green);
+  font-size: 2.2rem;
+  margin-bottom: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.fun-section p {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+}
+
+.fun-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.fun-card {
+  background-color: var(--bg);
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.fun-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+}
+
+.fun-card h3 {
+  color: var(--green);
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.fun-card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Mobile responsive */
+@media (max-width: 576px) {
+  .fun-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+
+
+
+
+.zigzag-section {
+  background-color: var(--card);
+  color: var(--text);
+  padding: 60px 20px;
+  border-radius: 16px;
+  margin: 60px 0;
+}
+
+.zigzag-section h2 {
+  color: var(--green);
+  font-size: 2.2rem;
+  margin-bottom: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.zigzag-section p {
+  color: var(--muted);
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.zigzag-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.zigzag-card {
+  background-color: var(--bg);
+  border-radius: 12px;
+  padding: 25px 20px;
+  max-width: 600px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.zigzag-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+}
+
+.zigzag-card.left {
+  align-self: flex-start;
+}
+
+.zigzag-card.right {
+  align-self: flex-end;
+}
+
+.zigzag-card h3 {
+  color: var(--green);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.zigzag-card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .zigzag-card.left,
+  .zigzag-card.right {
+    align-self: center;
+  }
 }

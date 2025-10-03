@@ -1,14 +1,15 @@
 <section class="hero">
     <div class="hero-content">
-        <h1>Góc sách yêu thích</h1>
-        <p>Khám phá thể loại bạn thích, xem review chân thực và tìm cảm hứng đọc mới.</p>
-        <a href="#genres" class="btn btn-primary">Khám phá ngay</a>
+        <h1>Favorite Book Corner</h1>
+        <p>Explore your favorite genres, read authentic reviews, and find new reading inspiration.</p>
+        <a href="#genres" class="btn btn-primary">Discover Now</a>
     </div>
 </section>
 
+
 <section id="genres" class="section">
     <div class="section-head">
-        <h2>Thể loại nổi bật</h2>
+        <h2>Featured Genres</h2>
     </div>
     <div id="genre-list" class="genre-grid">
 
@@ -36,7 +37,7 @@
                     </div>
                     <div class="card-actions">
                         {{!-- <span class="muted">${genre.description || ''}</span> --}}
-                        <a class="btn see-more" href="/category/{{this.slug}}">Xem thêm</a>
+                        <a class="btn see-more" href="/category/{{this.slug}}">See More</a>
                     </div>
                 </div>
             </section>
@@ -45,3 +46,73 @@
         {{/each}}
     </div>
 </section>
+
+<section class="fun-section">
+  <div class="fun-content">
+    <h2>Book Thoughts & Fun</h2>
+    <p>Some little reflections, fun insights, and thoughts about my favorite stories.</p>
+
+    <div class="fun-cards">
+      <div class="fun-card">
+        <h3>Reflection</h3>
+        <p>Every story leaves a tiny mark. Sometimes it’s a phrase, sometimes a feeling I can’t forget.</p>
+      </div>
+
+      <div class="fun-card">
+        <h3>Mini Insight</h3>
+        <p>Characters often teach more than plots. A clever twist in dialogue can stay in mind for days.</p>
+      </div>
+
+      <div class="fun-card">
+        <h3>Reading Mood</h3>
+        <p>Some books I revisit just for the atmosphere. Cozy, mysterious, or thrilling — each has its charm.</p>
+      </div>
+
+      <div class="fun-card">
+        <h3>Fun Note</h3>
+        <p>Sometimes the best stories are the ones I imagine myself continuing after the last page.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="fun-section zigzag-section">
+  <div class="fun-content">
+    <h2>Book Reflections & Notes</h2>
+    <p>Little thoughts and reflections on the stories I love.</p>
+
+    <div class="zigzag-cards">
+      <div class="zigzag-card left">
+        <h3>Favorite Characters</h3>
+        <p>Characters with depth always stay with me, even after finishing the story.</p>
+      </div>
+
+      <div class="zigzag-card right">
+        <h3>Plot Twists I Loved</h3>
+        <p>Unexpected turns that made me pause and think about the story differently.</p>
+      </div>
+
+      <div class="zigzag-card left">
+        <h3>Atmosphere</h3>
+        <p>Some books have a mood so vivid I can almost step into their world.</p>
+      </div>
+
+      <div class="zigzag-card right">
+        <h3>Memorable Quotes</h3>
+        <p>Lines that linger in my mind and make me reflect on life or imagination.</p>
+      </div>
+
+      <div class="zigzag-card left">
+        <h3>Mini Lessons</h3>
+        <p>Even short stories can teach something meaningful or spark new ideas.</p>
+      </div>
+
+      <div class="zigzag-card right">
+        <h3>Fun Thoughts</h3>
+        <p>Sometimes I imagine alternate endings or what characters would do next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+

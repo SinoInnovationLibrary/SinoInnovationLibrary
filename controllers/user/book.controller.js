@@ -20,24 +20,14 @@ class BookController {
                 });
             }
 
-            if (book.publishedDate) {
-                book.publishedDateVN = new Date(book.publishedDate).toLocaleDateString('vi-VN', {
-                    timeZone: 'Asia/Ho_Chi_Minh',
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit'
-                });
-            }
-
             const relatedBooks = await Book.find({
                 categoryId: book.categoryId._id,
                 isPublic: true,
                 _id: { $ne: book._id }
             })
-                .sort({ createdAt: -1 }) // sách mới trước
+                .sort({ createdAt: -1 })
                 .limit(6)
                 .lean();
-            // console.log(book);
             res.render('pages/user/book-detail.page.hbs', {
                 title: book.title,
                 book,

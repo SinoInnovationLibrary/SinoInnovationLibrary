@@ -35,14 +35,11 @@ class CategoriesPage {
                     const result = await getBookById(id);
                     const book = result.data;
                     if (book) {
-                        const date = new Date(book.publishedDate);
-                        const formattedDate = date.toISOString().split('T')[0];
-
+              
                         this.editBookForm.id.value = book._id;
                         this.editBookForm.name.value = book.title;
                         this.editBookForm.author.value = book.author;
-                        this.editBookForm.publishedDate.value = formattedDate;
-                        this.editBookForm.description.value = book.description ? book.description : '';
+                        this.editBookForm.publishedYear.value = book.publishedYear;
                         this.editBookForm.review.value = book.review ? book.review : '';
                         this.editBookForm.categoryId.value = book.categoryId ? book.categoryId._id : '';
 
@@ -108,9 +105,9 @@ class CategoriesPage {
         const form = e.target;
         const name = form.name.value.trim();
         const author = form.author.value.trim();
-        const publishedDate = form.publishedDate.value;
+        const publishedYear = form.publishedYear.value;
         const categoryId = form.categoryId.value;
-        const description = form.description.value.trim();
+        // const description = form.description.value.trim();
         const review = form.review.value.trim();
         const coverImageFile = form.coverImage.files[0];
 
@@ -123,8 +120,8 @@ class CategoriesPage {
             showToast('Vui lòng nhập tên tác giả.', 'error', 1000);
             return;
         }
-        if (!publishedDate) {
-            showToast('Vui lòng nhập ngày xuất bản.', 'error', 1000);
+        if (!publishedYear) {
+            showToast('Vui lòng nhập năm xuất bản.', 'error', 1000);
             return;
         }
         if (!categoryId) {
@@ -138,9 +135,9 @@ class CategoriesPage {
         const formData = new FormData();
         formData.append('name', name);
         formData.append('author', author);
-        formData.append('publishedDate', publishedDate);
+        formData.append('publishedYear', publishedYear);
         formData.append('categoryId', categoryId);
-        formData.append('description', description);
+        // formData.append('description', description);
         formData.append('review', review);
         formData.append('coverImage', coverImageFile);
 
@@ -171,9 +168,9 @@ class CategoriesPage {
         const id = form.id.value;
         const name = form.name.value.trim();
         const author = form.author.value.trim();
-        const publishedDate = form.publishedDate.value;
+        const publishedYear = form.publishedYear.value;
         const categoryId = form.categoryId.value;
-        const description = form.description.value.trim();
+        // const description = form.description.value.trim();
         const review = form.review.value.trim();
         const coverImageFile = form.coverImage.files[0];
 
@@ -186,8 +183,8 @@ class CategoriesPage {
             showToast('Vui lòng nhập tên tác giả.', 'error', 1000);
             return;
         }
-        if (!publishedDate) {
-            showToast('Vui lòng nhập ngày xuất bản.', 'error', 1000);
+        if (!publishedYear) {
+            showToast('Vui lòng nhập năm xuất bản.', 'error', 1000);
             return;
         }
         if (!categoryId) {
@@ -204,9 +201,9 @@ class CategoriesPage {
         formData.append('id', id);
         formData.append('name', name);
         formData.append('author', author);
-        formData.append('publishedDate', publishedDate);
+        formData.append('publishedYear', publishedYear);
         formData.append('categoryId', categoryId);
-        formData.append('description', description);
+        // formData.append('description', description);
         formData.append('review', review);
         formData.append('coverImage', coverImageFile);
 

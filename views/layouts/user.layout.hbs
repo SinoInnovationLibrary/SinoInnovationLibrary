@@ -19,24 +19,10 @@
   <link rel="stylesheet" href="/stylesheets/fonts.css" />
   <link rel="stylesheet" href="/stylesheets/style.css" />
   <link rel="stylesheet" href="/stylesheets/user/user.style.css" />
-  {{!-- <link rel="stylesheet" href="/stylesheets/user/home.style.css" />
-  <link rel="stylesheet" href="/stylesheets/user/book-detail.style.css" /> --}}
+  <link rel="icon" type="image/png" href="/images/favicon.png">
 </head>
 
 <body>
-  {{!-- <div class="user-layout">
-
-    <div class="user-content">
-      {{> user/header }}
-
-      <div id="search-results" class="container" style="display: none;">
-        <div class="row" id="search-results-row"></div>
-      </div>
-
-      {{{body}}}
-
-    </div>
-  </div> --}}
   {{> user/header }}
 
   <main id="main" class="container">
@@ -44,74 +30,7 @@
   </main>
   {{> user/footer }}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  {{!--
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const searchInput = document.querySelector('.search-input');
-      const searchResults = document.getElementById('search-results');
-      const mainContent = document.querySelector('.main-page'); // phần layout chính
-
-      function doSearch() {
-        const query = searchInput.value.trim();
-        if (!query) {
-          // Nếu xoá hết text → show lại main page
-          searchResults.style.display = 'none';
-          mainContent.style.display = 'block';
-          return;
-        }
-
-        // Ẩn layout cũ
-        mainContent.style.display = 'none';
-        searchResults.style.display = 'block';
-        searchResults.innerHTML = `<p class="text-muted">🔍 Đang tìm kiếm "${query}"...</p>`;
-
-        // Gọi API search
-        fetch(`/search?query=${encodeURIComponent(query)}`)
-          .then(res => res.json())
-          .then(data => {
-            if (data.books && data.books.length > 0) {
-              const html = data.books.map(book => `
-            <div class="card mb-3">
-              <div class="row g-0">
-                <div class="col-md-2">
-                  <img src="${book.coverImage || '/images/default-book.png'}" class="img-fluid rounded-start" alt="${book.title}">
-                </div>
-                <div class="col-md-10">
-                  <div class="card-body">
-                    <h5 class="card-title"><a href="/sach/${book.slug}">${book.title}</a></h5>
-                    <p class="card-text"><small class="text-body-secondary">Tác giả: ${book.author}</small></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `).join('');
-              searchResults.innerHTML = html;
-            } else {
-              searchResults.innerHTML = `<p class="text-danger">😢 Không tìm thấy kết quả nào cho "${query}".</p>`;
-            }
-          })
-          .catch(err => {
-            console.error(err);
-            searchResults.innerHTML = `<p class="text-danger">Lỗi khi tìm kiếm. Vui lòng thử lại.</p>`;
-          });
-      }
-
-      // Nhấn Enter để search
-      searchInput.addEventListener('keypress', e => {
-        if (e.key === 'Enter') doSearch();
-      });
-
-      // Khi xoá text → quay lại main page
-      searchInput.addEventListener('input', () => {
-        if (!searchInput.value.trim()) {
-          searchResults.style.display = 'none';
-          mainContent.style.display = 'block';
-        }
-      });
-    });
-
-  </script> --}}
-
+{{!-- 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const searchInput = document.querySelector('.search-input');
@@ -177,7 +96,7 @@
       });
     });
 
-  </script>
+  </script> --}}
 
 </body>
 

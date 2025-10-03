@@ -109,7 +109,7 @@ class BookController {
             const {
                 name,
                 author,
-                publishedDate,
+                publishedYear,
                 categoryId,
                 description,
                 review } = req.body;
@@ -131,10 +131,10 @@ class BookController {
                 });
             }
 
-            if (!publishedDate) {
+            if (!publishedYear) {
                 return res.status(400).json({
                     code: 400,
-                    message: 'Ngày xuất bản không được để trống.',
+                    message: 'Năm xuất bản không được để trống.',
                     data: null
                 });
             }
@@ -193,7 +193,7 @@ class BookController {
             const newBook = new Book({
                 title: trimmedTitle,
                 author: author.trim(),
-                publishedDate: new Date(publishedDate),
+                publishedYear: publishedYear,
                 categoryId: categoryId,
                 description: description?.trim() || null,
                 review: review?.trim() || null,
@@ -225,7 +225,7 @@ class BookController {
             const {
                 name,
                 author,
-                publishedDate,
+                publishedYear,
                 categoryId,
                 description,
                 review
@@ -265,10 +265,10 @@ class BookController {
                 });
             }
 
-            if (!publishedDate) {
+            if (!publishedYear) {
                 return res.status(400).json({
                     code: 400,
-                    message: 'Ngày xuất bản không được để trống.',
+                    message: 'Năm xuất bản không được để trống.',
                     data: null
                 });
             }
@@ -327,7 +327,7 @@ class BookController {
 
             book.title = trimmedTitle;
             book.author = author.trim();
-            book.publishedDate = new Date(publishedDate);
+            book.publishedYear = publishedYear;
             book.categoryId = categoryId;
             book.description = description?.trim() || null;
             book.review = review?.trim() || null;
