@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Windly - {{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI=" crossorigin="anonymous" />
+
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/stylesheets/fonts.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/admin/admin.style.css" />
+    <link rel="stylesheet" href="/stylesheets/auth/auth.style.css" />
+
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <!-- Loading Modal -->
+        <div id="loadingModal" class="loading-modal d-none">
+            <div class="loading-spinner"></div>
+        </div>
+
+        <!-- Toast Modal -->
+        <div id="toastModal" class="toast-modal">
+            <div id="toastMessage" class="toast-message"></div>
+        </div>
+
+        <!-- Confirm Modal -->
+        <div id="confirmModal" class="confirm-modal d-none">
+            <div class="confirm-content section">
+                <p id="confirmMessage">
+                    {{!-- Message here --}}
+                </p>
+                <div class="confirm-actions">
+                    <button id="confirmOkBtn" class="btn btn-danger">Đồng ý</button>
+                    <button id="confirmCancelBtn" class="btn btn-secondary">Huỷ</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            <div class="particle-background" id="particleBackground"></div>
+
+            {{{body}}}
+        </div>
+    </div>
+
+    <script type="module" src="/javascripts/app.admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const particleBackground = document.getElementById('particleBackground');
+            const particleCount = 50;
+
+            // Create particles
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('span');
+                particle.className = 'particle';
+
+                // Random positioning
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${8 + Math.random() * 10}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+
+                particleBackground.appendChild(particle);
+            }
+        });
+    </script>
+</body>
+
+</html>

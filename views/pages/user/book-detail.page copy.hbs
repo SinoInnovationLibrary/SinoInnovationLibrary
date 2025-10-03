@@ -1,0 +1,92 @@
+<div class="book-detail-page main-page">
+    <div class="container">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/category/{{book.categoryId.slug}}">{{book.categoryId.name}}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{{book.title}}</li>
+            </ol>
+        </nav>
+
+        <!-- Thông tin sách -->
+        <div class="book-detail">
+            <div class="row">
+                <div class="col-md-3">
+                    {{!-- {{#if book.coverImage}}
+                    <img src="{{book.coverImage}}" alt="{{book.title}}"
+                        class="book-coverImage img-fluid rounded shadow ">
+                    {{else}}
+                    <img src="/images/default-book.png" alt="No cover" class="img-fluid rounded shadow">
+                    {{/if}} --}}
+                    <img src="/api/image/{{book._id}}" alt="{{book.title}}"
+                        class="book-coverImage img-fluid rounded shadow ">
+                </div>
+                <div class="col-md-9">
+                    <h1>{{book.title}}</h1>
+
+                    <!-- Thông tin cơ bản ngang hàng, full width -->
+                    <div class="d-flex justify-content-between flex-wrap mb-3">
+                        <div><strong>Tác giả:</strong> {{book.author}}</div>
+                        {{#if book.categoryId}}
+                        <div><strong>Thể loại:</strong> {{book.categoryId.name}}</div>
+                        {{/if}}
+                        {{#if book.publishedDateVN}}
+                        <div><strong>Ngày xuất bản:</strong> {{book.publishedDateVN}}</div>
+                        {{/if}}
+                    </div>
+
+                    <p>
+                        <strong>Mô tả:</strong>
+                        {{#if book.description}}
+                        {{book.description}}
+                        {{else}}
+                        Đang cập nhật...
+                        {{/if}}
+                    </p>
+
+                    <p>
+                        <strong>Cảm nhận:</strong>
+                        {{#if book.review}}
+                        {{book.review}}
+                        {{else}}
+                        Đang cập nhật...
+                        {{/if}}
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        {{!-- Danh sách sách cùng thể loại --}}
+        {{#if relatedBooks.length}}
+        <div class="related-books mt-5">
+            <h3>Sách cùng thể loại</h3>
+            <div class="row">
+                {{#each relatedBooks}}
+                <div class="col-md-2 mb-3">
+                    <a href="/{{this.slug}}" class="text-decoration-none">
+                        <div class="card h-100">
+                            {{!-- {{#if this.coverImage}}
+                            <img src="{{this.coverImage}}" class="card-img-top" alt="{{this.title}}">
+                            {{else}}
+                            <img src="/images/default-book.png" class="card-img-top" alt="No cover">
+                            {{/if}} --}}
+                            <img src="/api/image/{{this._id}}" class="card-img-top" alt="{{this.title}}">
+
+                            <div class="card-body">
+                                <h6 class="card-title">{{this.title}}</h6>
+                                <h6 class="card-author">Tác giả: {{this.author}}</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+
+    </div>
+</div>

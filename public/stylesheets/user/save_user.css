@@ -1,0 +1,107 @@
+:root {
+  --color-primary: #23a241;
+
+  --color-background-1: #8bd7fc;
+
+  --color-surface: #323D4E;
+
+  --color-text-primary: var(--color-white);
+
+  /* Màu trạng thái / accent */
+  --color-accent-1: #6cb844;
+  --color-accent-2: #6226EF;
+  --color-accent-3: #EF3826;
+  --color-accent-4: #FFA756;
+  --color-accent-5: #BA29FF;
+  --color-accent-6: #4880FF;
+
+  --color-stroke-1: #313D4F;
+  --color-stroke-2: rgba(207, 207, 207, 0.1);
+
+  --color-disabled: #3D4A5F;
+
+  --zindex-modal: 1000;
+  --zindex-confirm: 1100;
+  --zindex-loading: 1100;
+  --zindex-toast: 1200;
+  --zindex-admin-sidebar: 99;
+
+  --admin-sidebar-width: 280px;
+  --transition-speed: 0.3s;
+
+  --margin-step: 12px;
+  --padding-step: 12px;
+
+
+
+  --color-white: #FFFFFF;
+  --color-black: #333333;
+
+  --color-text: #333333;
+}
+
+html,
+body {
+  color: var(--color-text);
+}
+
+.user-layout .user-content {
+  /* height: 100%; */
+  /* min-height: 100vw; */
+  /* overflow-y: auto; */
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body {
+  background-color: var(--color-background-1);
+}
+
+.user-layout .container {
+  background-color: var(--color-white);
+}
+
+
+.category-page {
+  flex: 1;
+}
+.category-page .container {
+  padding: 0 12px 12px;
+  min-height: 100%;
+}
+
+
+
+.breadcrumb {
+  background-color: transparent;
+  padding: 12px 0;
+  margin: 0;
+}
+
+.breadcrumb-item a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+  color: var(--color-primary);
+}
+
+.breadcrumb-item.active {
+  color: #212529;
+  font-weight: 600;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+  content: "›";
+  color: #6c757d;
+}
+
+
+
+#search-results {
+  padding: 12px;
+}

@@ -1,0 +1,56 @@
+:root {
+    /* ==== MÀU CHỦ ĐẠO ==== */
+    --color-primary: #273142;
+    /* Màu chính – dùng cho header, section, sidebar */
+
+    --color-surface: #323D4E;
+    /* Bề mặt nổi – input, panel, box, chat, button phụ */
+
+    --color-primary-dark: #1B2431;
+    /* Màu nền tối hơn – dùng cho background tổng thể */
+
+    --color-accent: #4880FF;
+    /* Accent – dùng cho button, icon nổi bật, item được chọn */
+
+    --color-stroke-dark: #313D4F;
+    /* Viền đậm */
+
+    --color-primary-light: #2B3B5B;
+
+    --color-stroke-light: rgba(207, 207, 207, 0.2);
+    /* Viền nhẹ, nhạt màu */
+
+
+    /* ==== MÀU VĂN BẢN ==== */
+    --color-text: #ffffff;
+
+    /* ==== TRẠNG THÁI ==== */
+    --color-success: #00B69B;
+    --color-info: #6226EF;
+    --color-error: #EF3826;
+    --color-warning: #FFA756;
+    --color-special: #BA29FF;
+    --color-active: #FF8743;
+    --color-muted: #6c757d;
+
+    /* ==== KÍCH THƯỚC LAYOUT ==== */
+    --admin-sidebar-width: 240px;
+
+    /* ==== INDEX LAYOUT ==== */
+    --admin-sidebar-index: 1000;
+}
+
+
+.categories-page .required {
+    color: var(--color-error);
+    margin-left: 2px;
+}
+
+
+.admin-layout .admin-table th.table-name,
+.admin-layout .admin-table td.table-name,
+.admin-layout .admin-table th.table-description,
+.admin-layout .admin-table td.table-description {
+    width: 50%;
+    white-space: normal;
+}

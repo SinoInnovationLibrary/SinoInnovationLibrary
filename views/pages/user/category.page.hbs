@@ -1,0 +1,24 @@
+<section class="section">
+    <div class="section-head">
+        <h1 id="genre-title">{{category.name}}</h1>
+        <p id="genre-desc" class="muted"></p>
+    </div>
+
+    <div id="book-list" class="book-grid">
+        {{#if books.length}}
+        {{#each books}}
+        <a class="book-card" href="/sach/{{this.slug}}">
+            <img class="cover" src="/api/image/{{this._id}}" alt="{{this.slug}}">
+            <div class="book-body">
+                <h3 class="title">{{this.title}}</h3>
+                <p class="author">{{this.author}}</p>
+            </div>
+        </a>
+        {{/each}}
+        {{else}}
+        <div class="alert alert-info mt-3" role="alert">
+            Thể loại này hiện chưa có sách nào. Bạn hãy quay lại sau nhé!
+        </div>
+        {{/if}}
+    </div>
+</section>

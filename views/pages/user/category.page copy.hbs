@@ -1,0 +1,42 @@
+<div class="category-page main-page">
+
+    <div class="container">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{category.name}}</li>
+            </ol>
+        </nav>
+
+        <h2>{{category.name}}</h2>
+        {{#if books.length}}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+            {{#each books}}
+            <div class="col">
+                <a href="/sach/{{this.slug}}" class="text-decoration-none">
+                    <div class="card h-100">
+                        {{!-- {{#if this.coverImage}}
+                        <img src="{{this.coverImage}}" class="card-img-top" alt="{{this.title}}">
+                        {{else}}
+                        <img src="/images/default-book.png" class="card-img-top" alt="No cover">
+                        {{/if}} --}}
+                        <img src="/api/image/{{this._id}}" class="card-img-top" alt="{{this.title}}">
+                    
+                        <div class="card-body">
+                            <h6 class="card-title text-truncate">{{this.title}}</h6>
+                            <h6 class="card-author">Tác giả: {{this.author}}</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {{/each}}
+        </div>
+        {{else}}
+        <div class="alert alert-info mt-3" role="alert">
+            Thể loại này hiện chưa có sách nào. Bạn hãy quay lại sau nhé!
+        </div>
+        {{/if}}
+    </div>
+</div>

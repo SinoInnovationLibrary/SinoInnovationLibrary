@@ -1,0 +1,47 @@
+<section class="hero">
+    <div class="hero-content">
+        <h1>Góc sách yêu thích</h1>
+        <p>Khám phá thể loại bạn thích, xem review chân thực và tìm cảm hứng đọc mới.</p>
+        <a href="#genres" class="btn btn-primary">Khám phá ngay</a>
+    </div>
+</section>
+
+<section id="genres" class="section">
+    <div class="section-head">
+        <h2>Thể loại nổi bật</h2>
+    </div>
+    <div id="genre-list" class="genre-grid">
+
+        {{#each categories}}
+        <div class="genre-item genre-card-wrapper">
+
+            <section class="genre-card">
+                <div class="genre-meta">
+                    <span class="chip">{{this.name}}</span>
+                </div>
+                <div>
+                    <div class="book-strip">
+                        {{#if books.length}}
+                        {{#each this.books}}
+                        <a class="book-card" href="/sach/{{this.slug}}">
+                            {{!-- <div class="cover" aria-hidden="true"></div> --}}
+                            <img class="cover" src="/api/image/{{this._id}}" alt="{{this.slug}}">
+                            <div class="book-body">
+                                <h3 class="title">{{this.title}}</h3>
+                                <p class="author">{{this.author}}</p>
+                            </div>
+                        </a>
+                        {{/each}}
+                        {{/if}}
+                    </div>
+                    <div class="card-actions">
+                        {{!-- <span class="muted">${genre.description || ''}</span> --}}
+                        <a class="btn see-more" href="/category/{{this.slug}}">Xem thêm</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        {{/each}}
+    </div>
+</section>

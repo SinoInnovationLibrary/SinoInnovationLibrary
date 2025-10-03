@@ -1,0 +1,87 @@
+<article id="book-detail" class="book-detail">
+    <div class="detail-header">
+
+        <img class="cover-skeleton" src="/api/image/{{book._id}}" alt="{{book.title}}">
+        <div class="meta">
+            <h1 id="book-title">{{book.title}}</h1>
+            <div class="meta-grid">
+                <div><span class="label">Tác giả: </span><span id="book-author" class="value">{{book.author}}</span>
+                </div>
+                <div><span class="label">Thể loại: </span><a id="book-genre" class="chip">{{book.categoryId.name}}</a>
+                </div>
+                <div><span class="label">Xuất bản: </span><span id="book-date"
+                        class="value">{{book.publishedDateVN}}</span></div>
+            </div>
+            <p id="book-desc" class="desc"></p>
+            <div>
+                <div style="display: flex;align-items: center;justify-content: space-between;">
+                    <h3> - Mô tả: </h3>
+                    <button id="btn-summarize" style="margin-left: 12px;" data-slug="{{book.slug}}" class="btn">Mô tả bằng AI</button>
+                </div>
+                {{!-- <p id="book-review" class="review">
+                    {{#if book.description}}
+                    {{book.description}}
+                    {{else}}
+                    Đang cập nhật...
+                    {{/if}}
+                </p> --}}
+
+                <p id="ai-summary" class="ai-summary muted"></p>
+                <h3> - Cảm nhận:</h3>
+                <p id="book-review" class="review">
+                    {{#if book.review}}
+                    {{book.review}}
+                    {{else}}
+                    Đang cập nhật...
+                    {{/if}}
+                </p>
+            </div>
+        </div>
+    </div>
+</article>
+
+{{#if relatedBooks.length}}
+<section class="section">
+    <div class="section-head">
+        <h2>Cùng thể loại</h2>
+    </div>
+    <div id="related-list" class="book-row">
+
+        {{#each relatedBooks}}
+        <a class="book-card" href="/sach/{{this.slug}}">
+            <img class="cover" src="/api/image/{{this._id}}" alt="{{this.slug}}">
+            <div class="book-body">
+                <h3 class="title">{{this.title}}</h3>
+                <p class="author">{{this.author}}</p>
+            </div>
+        </a>
+        {{/each}}
+    </div>
+</section>
+{{/if}}
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById("btn-summarize");
+        const slug = btn.getAttribute('data-slug')
+        console.log(slug)
+        if (btn) {
+            btn.addEventListener("click", async () => {
+                btn.disabled = true;
+                btn.textContent = "Đang mô tả vui lòng đợi...";
+                const desc = document.getElementById("book-review").innerText;
+                const res = await fetch("/api/ai/summarize", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ slug })
+                });
+                const data = await res.json();
+                document.getElementById("ai-summary").innerText = data.summary || "Không tóm tắt được";
+                btn.textContent = "Tóm tắt bằng AI";
+                btn.disabled = false;
+            });
+        }
+
+    })
+</script>

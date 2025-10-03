@@ -1,0 +1,29 @@
+<div class="login-card section">
+    <div class="brand-section">
+        <div class="logo">
+            <h1 class="logo-text">Admin</h1>
+        </div>
+    </div>
+
+    <form class="form" id="loginForm">
+        <div class="input-group">
+            <label class="input-label">TÊN ĐĂNG NHẬP</label>
+            <input class="input-field" type="text" id="username" placeholder="username" />
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">MẬT KHẨU</label>
+            <input class="input-field" type="password" id="password" placeholder="••••••••" />
+            <span class="text-danger error-message mt-1 error-password" style="display:none;"></span>
+        </div>
+
+        <button class="login-button" id="loginButton" type="submit">
+            ĐĂNG NHẬP
+        </button>
+
+        <div class="error-message" id="errorMessage" style="display: none;"></div>
+    </form>
+</div>
+
+
+<script type="module" src="/javascripts/module/login.module.js"></script>

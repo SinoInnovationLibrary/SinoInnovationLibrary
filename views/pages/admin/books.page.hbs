@@ -1,0 +1,278 @@
+<div class="{{active}}-page admin-page">
+    <div class="admin-page-header">
+        <h1 class="admin-page-title">Quản lý sách</h1>
+        <button type="button" class="btn btn-primary add-book-btn" data-bs-toggle="modal"
+            data-bs-target="#addBookModal">
+            <i class="bi bi-plus-lg me-1"></i>
+            Thêm sách
+        </button>
+    </div>
+
+    <div class="section">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Ảnh bìa</th>
+                    <th class="table-title">Tên sách</th>
+                    <th class="table-author">Tác giả</th>
+                    <th class="table-published-date">Ngày xuất bản</th>
+                    <th class="table-category">Thể loại</th>
+                    {{!-- <th>Trạng thái</th> --}}
+                    <th class="table-status">
+                        Trạng thái
+                        {{!-- <span class="tooltip-wrapper">
+                            <i class="bi bi-info-circle info-icon"></i>
+                            <span class="custom-tooltip">Bật để công khai sách, tắt để đặt ở chế độ riêng tư</span>
+                        </span> --}}
+                    </th>
+                    <th class="table-actions">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#if books.length}}
+                {{#each books}}
+                <tr>
+                    <td class="table-image">
+                        {{#if this.coverImage}}
+                        <div class="image-wrapper">
+                            <img src="{{this.coverImage}}" alt="Bìa sách" class="book-cover"
+                                style="width: 64px; height: 64px; object-fit: cover;" />
+                        </div>
+                        {{else}}
+                        <span>Không có</span>
+                        {{/if}}
+                    </td>
+                    <td class="table-title">{{this.title}}</td>
+                    <td class="table-author">{{this.author}}</td>
+                    <td class="table-published-date">{{formatDate this.publishedDate}}</td>
+                    <td class="table-category">{{this.categoryId.name}}</td>
+                    {{!-- <td>
+                        {{#if this.isPublic}}
+                        <span class="badge badge-success">Công khai</span>
+                        {{else}}
+                        <span class="badge badge-secondary">Riêng tư</span>
+                        {{/if}}
+                    </td> --}}
+
+                    <td class="table-status">
+                        <label class="switch">
+                            <input type="checkbox" class="toggle-public" data-id="{{this._id}}" {{#if
+                                this.isPublic}}checked{{/if}}>
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+
+                    <td class="table-actions">
+                        <div class="action-group">
+                            <button class="action-btn edit-btn" title="Sửa" data-bs-toggle="modal"
+                                data-bs-target="#editBookModal" data-id="{{this._id}}">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+
+                            <button class="action-btn delete-btn" title="Xoá" data-id="{{this._id}}">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </div>
+                    </td>
+
+
+                </tr>
+                {{/each}}
+                {{else}}
+                <tr>
+                    <td colspan="7" style="text-align: center; font-style: italic;">Chưa có sách nào</td>
+                </tr>
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
+    {{#if (gt pagination.totalPages 1)}}
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <div class="pagination-info">
+            Hiển thị
+            {{pagination.startIndex}}–{{pagination.endIndex}}
+            trong tổng {{pagination.totalPages}} mục
+        </div>
+
+        <ul class="pagination mb-0 section">
+            {{#if pagination.hasPrevPage}}
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page={{pagination.prevPage}}&sortField={{currentSortField}}&sortOrder={{currentSortOrder}}">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+            {{/if}}
+
+            {{#each (paginationPages pagination.totalPages pagination.currentPage)}}
+            {{#if this.isEllipsis}}
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            {{else}}
+            <li class="page-item {{#if this.active}}active{{/if}}">
+                <a class="page-link"
+                    href="?page={{this.page}}&sortField={{../currentSortField}}&sortOrder={{../currentSortOrder}}">
+                    {{this.page}}
+                </a>
+            </li>
+            {{/if}}
+            {{/each}}
+
+            {{#if pagination.hasNextPage}}
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page={{pagination.nextPage}}&sortField={{currentSortField}}&sortOrder={{currentSortOrder}}">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+            {{/if}}
+        </ul>
+    </div>
+    {{/if}}
+
+    <div class="modal fade" id="addBookModal" tabindex="-1" aria-labelledby="addBookModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content section">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addBookModalLabel">Thêm sách</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Đóng"></button>
+                </div>
+                <form id="addBookForm">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="bookName" class="form-label">Tên sách <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="bookName" name="name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="bookAuthor" class="form-label">Tác giả <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="bookAuthor" name="author">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="bookPublishedDate" class="form-label">
+                                Ngày xuất bản
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="date" class="form-control" id="bookPublishedDate" name="publishedDate">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="bookCategory" class="form-label">Thể loại <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" id="bookCategory" name="categoryId">
+                                <option value="">-- Chọn thể loại --</option>
+                                {{#each categories}}
+                                <option value="{{this._id}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="addBookCoverImage" class="form-label">Ảnh bìa (Upload File) <span
+                                    class="text-danger">*</span></label>
+                            <input type="file" class="form-control" id="addBookCoverImage" name="coverImage"
+                                accept="image/*">
+
+                            <img id="addCoverPreview" src="" alt="Preview ảnh bìa" class="mt-2"
+                                style="max-width: 200px; display: none; border-radius: 16px;">
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="bookDescription" class="form-label">Mô tả</label>
+                            <textarea class="form-control" id="bookDescription" name="description" rows="5"></textarea>
+                        </div>
+
+                        <!-- Cảm nhận -->
+                        <div class="mb-3">
+                            <label for="bookReview" class="form-label">Cảm nhận</label>
+                            <textarea class="form-control" id="bookReview" name="review" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editBookModal" tabindex="-1" aria-labelledby="editBookModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content section">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editBookModalLabel">Chỉnh sửa sách</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Đóng"></button>
+                </div>
+                <form id="editBookForm">
+                    <div class="modal-body">
+                        <!-- Hidden input to store book ID -->
+                        <input type="hidden" id="editBookId" name="id">
+
+                        <div class="mb-3">
+                            <label for="editBookName" class="form-label">Tên sách <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="editBookName" name="name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="editBookAuthor" class="form-label">Tác giả <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="editBookAuthor" name="author">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="editBookPublishedDate" class="form-label">Ngày xuất bản <span
+                                    class="text-danger">*</span></label>
+                            <input type="date" class="form-control" id="editBookPublishedDate" name="publishedDate">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="editBookCategory" class="form-label">Thể loại <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" id="editBookCategory" name="categoryId">
+                                <option value="">-- Chọn thể loại --</option>
+                                {{#each categories}}
+                                <option value="{{this._id}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="editBookCoverImage" class="form-label">Ảnh bìa (Upload File)</label>
+                            <input type="file" class="form-control" id="editBookCoverImage" name="coverImage"
+                                accept="image/*">
+
+                            <img id="editCoverPreview" src="" alt="Preview ảnh bìa" class="mt-2"
+                                style="max-width: 200px; max-height: 200px; display: none; border-radius: 16px;">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="editBookDescription" class="form-label">Mô tả</label>
+                            <textarea class="form-control" id="editBookDescription" name="description"
+                                rows="5"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="editBookReview" class="form-label">Cảm nhận</label>
+                            <textarea class="form-control" id="editBookReview" name="review" rows="5"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script type="module" src="/javascripts/module/{{active}}.module.js"></script>

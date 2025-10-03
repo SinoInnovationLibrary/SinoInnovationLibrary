@@ -1,0 +1,35 @@
+<div class="admin-sidebar">
+  <h1 class="admin-logo">My Admin</h1>
+
+  <nav class="admin-nav">
+    <ul>
+      {{!-- <li><a href="#" class="disabled"><i class="bi bi-slash-circle"></i> Thống kê</a> --}}
+
+      <li>
+        <a href="/admin/books" class="{{#if (eq active 'books')}}active{{/if}}">
+          Quản lý sách
+        </a>
+      </li>
+      <li>
+        <a href="/admin/categories" class="{{#if (eq active 'categories')}}active{{/if}}">
+          Quản lý thể loại sách
+        </a>
+      </li>
+
+      <li>
+        <a href="#" id="logoutLink">
+          Đăng xuất
+        </a>
+      </li>
+      {{!-- <li><a href="#" class="disabled"><i class="bi bi-slash-circle"></i> Quản lý tác giả</a>
+      </li>
+      <li><a href="#" class="disabled"><i class="bi bi-slash-circle"></i> Quản lý nhà xuất bản</a>
+      </li>
+      <li><a href="#" class="disabled"><i class="bi bi-slash-circle"></i> Quản lý người dùng</a>
+      </li>
+      <li><a href="#" class="disabled"><i class="bi bi-slash-circle"></i> Quản lý bình luận</a></li>
+      <li><a href="#" class="disabled"><i class="bi bi-slash-circle"></i> Quản lý đánh giá</a></li> --}}
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -1,0 +1,174 @@
+<div class="{{active}}-page admin-page">
+    <div class="admin-page-header">
+        <h1 class="admin-page-title">Quản lý thể loại</h1>
+        <button type="button" class="btn btn-primary add-category-btn" data-bs-toggle="modal"
+            data-bs-target="#addCategoryModal">
+            <i class="bi bi-plus-lg me-1"></i>
+            Thêm thể loại
+        </button>
+    </div>
+
+    <div class="section">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th class="table-name">Tên thể loại</th>
+                    <th class="table-description">Mô tả</th>
+                    <th class="table-status">
+                        Trạng thái
+                        {{!-- <span class="tooltip-wrapper">
+                            <i class="bi bi-info-circle info-icon"></i>
+                            <span class="custom-tooltip">Bật để công khai sách, tắt để đặt ở chế độ riêng tư</span>
+                        </span> --}}
+                    </th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#if categories.length}}
+                {{#each categories}}
+                <tr>
+                    <td class="table-name">{{this.name}}</td>
+                    <td class="table-description">{{this.description}}</td>
+                    <td class="table-status">
+                        <label class="switch">
+                            <input type="checkbox" class="toggle-public" data-id="{{this._id}}" {{#if
+                                this.isPublic}}checked{{/if}}>
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td class="table-actions">
+                        <div class="action-group">
+                            <button class="action-btn edit-btn" title="Sửa" data-bs-toggle="modal"
+                                data-bs-target="#editCategoryModal" data-id="{{this._id}}" data-name="{{this.name}}"
+                                data-description="{{this.description}}">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button class="action-btn delete-btn {{#unless this.isDeletable}}disabled{{/unless}}"
+                                title="Xoá" data-id="{{this._id}}">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+                {{else}}
+                <tr>
+                    <td colspan="4" style="text-align: center; font-style: italic;">Chưa có thể loại nào</td>
+                </tr>
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
+
+    {{#if (gt pagination.totalPages 1)}}
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <div class="pagination-info">
+            Hiển thị
+            {{pagination.startIndex}}–{{pagination.endIndex}}
+            trong tổng {{pagination.totalPages}} mục
+        </div>
+
+        <ul class="pagination mb-0 section">
+            {{#if pagination.hasPrevPage}}
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page={{pagination.prevPage}}&sortField={{currentSortField}}&sortOrder={{currentSortOrder}}">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+            {{/if}}
+
+            {{#each (paginationPages pagination.totalPages pagination.currentPage)}}
+            {{#if this.isEllipsis}}
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            {{else}}
+            <li class="page-item {{#if this.active}}active{{/if}}">
+                <a class="page-link"
+                    href="?page={{this.page}}&sortField={{../currentSortField}}&sortOrder={{../currentSortOrder}}">
+                    {{this.page}}
+                </a>
+            </li>
+            {{/if}}
+            {{/each}}
+
+            {{#if pagination.hasNextPage}}
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page={{pagination.nextPage}}&sortField={{currentSortField}}&sortOrder={{currentSortOrder}}">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+            {{/if}}
+        </ul>
+    </div>
+    {{/if}}
+
+    <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content section">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCategoryModalLabel">Thêm thể loại</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Đóng"></button>
+                </div>
+                <form id="addCategoryForm">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="categoryName" class="form-label">Tên thể loại <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="categoryName" name="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoryDescription" class="form-label">Mô tả</label>
+                            <textarea class="form-control" id="categoryDescription" name="description"
+                                rows="4"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content section">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCategoryModalLabel">Chỉnh sửa thể loại</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Đóng"></button>
+                </div>
+                <form id="editCategoryForm">
+                    <input type="hidden" id="editCategoryId" name="id">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="editCategoryName" class="form-label">Tên thể loại <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="editCategoryName" name="name">
+                            <div class="invalid-feedback">Vui lòng nhập tên thể loại.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCategoryDescription" class="form-label">Mô tả</label>
+                            <textarea class="form-control" id="editCategoryDescription" name="description"
+                                rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="module" src="/javascripts/module/{{active}}.module.js"></script>
