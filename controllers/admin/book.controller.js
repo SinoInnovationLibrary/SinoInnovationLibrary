@@ -9,6 +9,60 @@ const cloudinary = require('../../config/cloudinary');
 const { extractPublicId } = require('../../utils/utils')
 
 class BookController {
+    // async renderBookPage(req, res) {
+    //     const page = parseInt(req.query.page) || 1;
+    //     const limit = 10;
+    //     const skip = (page - 1) * limit;
+
+    //     const sortField = req.query.sortField || 'name';
+    //     const sortOrder = req.query.sortOrder === 'desc' ? -1 : 1;
+
+    //     try {
+    //         const [books, totalCount, categories] = await Promise.all([
+    //             Book.find()
+    //                 .populate({ path: 'categoryId', select: 'name' })
+    //                 .sort({ [sortField]: sortOrder })
+    //                 .skip(skip)
+    //                 .limit(limit)
+    //                 .lean(),
+    //             Book.countDocuments(),
+    //             Category.find().select('_id name').lean()
+    //         ]);
+
+    //         const startIndex = totalCount === 0 ? 0 : skip + 1;
+    //         const endIndex = Math.min(skip + books.length, totalCount);
+    //         const totalPages = Math.ceil(totalCount / limit);
+
+    //         res.render('pages/admin/books.page.hbs', {
+    //             title: 'Quản lý sách',
+    //             books,
+    //             categories,
+    //             pagination: {
+    //                 startIndex,
+    //                 endIndex,
+    //                 currentPage: page,
+    //                 totalPages,
+    //                 hasPrevPage: page > 1,
+    //                 hasNextPage: page < totalPages,
+    //                 prevPage: page - 1,
+    //                 nextPage: page + 1
+    //             },
+    //             currentSortField: sortField,
+    //             currentSortOrder: sortOrder === 1 ? 'asc' : 'desc'
+    //         });
+    //     } catch (err) {
+    //         console.error('Lỗi hiển thị trang sách:', err);
+    //         return res.status(500).json({
+    //             status: 500,
+    //             code: 'SERVER_ERROR',
+    //             message: 'Lỗi máy chủ',
+    //             data: err.message
+    //         });
+    //     }
+    // }
+
+
+
     async renderBookPage(req, res) {
         const page = parseInt(req.query.page) || 1;
         const limit = 10;
@@ -16,16 +70,22 @@ class BookController {
 
         const sortField = req.query.sortField || 'name';
         const sortOrder = req.query.sortOrder === 'desc' ? -1 : 1;
+        const search = req.query.search ? req.query.search.trim() : '';
 
         try {
+            // Nếu có search thì tạo filter theo slug, không thì để filter rỗng
+            const filter = search
+                ? { slug: { $regex: slugify(removeAccents(search), { lower: true, strict: true }) } }
+                : {};
+
             const [books, totalCount, categories] = await Promise.all([
-                Book.find()
+                Book.find(filter)
                     .populate({ path: 'categoryId', select: 'name' })
                     .sort({ [sortField]: sortOrder })
                     .skip(skip)
                     .limit(limit)
                     .lean(),
-                Book.countDocuments(),
+                Book.countDocuments(filter),
                 Category.find().select('_id name').lean()
             ]);
 
@@ -48,7 +108,8 @@ class BookController {
                     nextPage: page + 1
                 },
                 currentSortField: sortField,
-                currentSortOrder: sortOrder === 1 ? 'asc' : 'desc'
+                currentSortOrder: sortOrder === 1 ? 'asc' : 'desc',
+                currentSearch: search // giữ trong ô input
             });
         } catch (err) {
             console.error('Lỗi hiển thị trang sách:', err);
@@ -60,6 +121,7 @@ class BookController {
             });
         }
     }
+
 
 
     async getBookById(req, res) {

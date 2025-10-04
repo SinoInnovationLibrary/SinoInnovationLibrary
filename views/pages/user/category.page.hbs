@@ -11,8 +11,9 @@
         <p id="genre-desc" class="muted"></p>
     </div>
 
+    {{#if books.length}}
     <div id="book-list" class="book-grid">
-        {{#if books.length}}
+
         {{#each books}}
         <a class="book-card" href="/sach/{{this.slug}}">
             <img class="cover" src="/api/image/{{this._id}}" alt="{{this.slug}}">
@@ -22,10 +23,11 @@
             </div>
         </a>
         {{/each}}
-        {{else}}
-        <div class="alert alert-info mt-3" role="alert">
-            Thể loại này hiện chưa có sách nào. Bạn hãy quay lại sau nhé!
-        </div>
-        {{/if}}
     </div>
+
+    {{else}}
+    <div class="alert alert-info mt-3" role="alert">
+        Thể loại này hiện chưa có sách nào. Bạn hãy quay lại sau nhé!
+    </div>
+    {{/if}}
 </section>

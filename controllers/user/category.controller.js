@@ -25,7 +25,7 @@ class CategoryController {
                 .lean();
 
             res.render('pages/user/category.page.hbs', {
-                title: category.name,
+                title: "Sino Innovation Library - " + category.name,
                 category,
                 books
             });

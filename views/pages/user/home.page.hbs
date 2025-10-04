@@ -1,50 +1,55 @@
 <section class="hero">
-    <div class="hero-content">
-        <h1>Favorite Book Corner</h1>
-        <p>Explore your favorite genres, read authentic reviews, and find new reading inspiration.</p>
-        <a href="#genres" class="btn btn-primary">Discover Now</a>
-    </div>
+  <div class="hero-content">
+    <h1>Favorite Book Corner</h1>
+    <p>Explore your favorite genres, read authentic reviews, and find new reading inspiration.</p>
+    <a href="#genres" class="btn btn-primary">Discover Now</a>
+  </div>
 </section>
 
-
 <section id="genres" class="section">
-    <div class="section-head">
-        <h2>Featured Genres</h2>
-    </div>
-    <div id="genre-list" class="genre-grid">
+  <div class="section-head">
+    <h2>Featured Genres</h2>
+  </div>
+  <div id="genre-list" class="genre-grid">
+    {{#if categories.length}}
+    {{#each categories}}
+    <div class="genre-item genre-card-wrapper">
 
-        {{#each categories}}
-        <div class="genre-item genre-card-wrapper">
-
-            <section class="genre-card">
-                <div class="genre-meta">
-                    <span class="chip">{{this.name}}</span>
-                </div>
-                <div>
-                    <div class="book-strip">
-                        {{#if books.length}}
-                        {{#each this.books}}
-                        <a class="book-card" href="/sach/{{this.slug}}">
-                            {{!-- <div class="cover" aria-hidden="true"></div> --}}
-                            <img class="cover" src="/api/image/{{this._id}}" alt="{{this.slug}}">
-                            <div class="book-body">
-                                <h3 class="title">{{this.title}}</h3>
-                                <p class="author">{{this.author}}</p>
-                            </div>
-                        </a>
-                        {{/each}}
-                        {{/if}}
-                    </div>
-                    <div class="card-actions">
-                        {{!-- <span class="muted">${genre.description || ''}</span> --}}
-                        <a class="btn see-more" href="/category/{{this.slug}}">See More</a>
-                    </div>
-                </div>
-            </section>
+      <section class="genre-card">
+        <div class="genre-meta">
+          <span class="chip">{{this.name}}</span>
         </div>
-
-        {{/each}}
+        <div>
+          <div class="book-strip">
+            {{#if books.length}}
+            {{#each this.books}}
+            <a class="book-card" href="/sach/{{this.slug}}">
+              {{!-- <div class="cover" aria-hidden="true"></div> --}}
+              <img class="cover" src="/api/image/{{this._id}}" alt="{{this.slug}}">
+              <div class="book-body">
+                <h3 class="title">{{this.title}}</h3>
+                <p class="author">{{this.author}}</p>
+              </div>
+            </a>
+            {{/each}}
+            {{/if}}
+          </div>
+          <div class="card-actions">
+            {{!-- <span class="muted">${genre.description || ''}</span> --}}
+            <a class="btn see-more" href="/category/{{this.slug}}">See More</a>
+          </div>
+        </div>
+      </section>
     </div>
+
+    {{/each}}
+    {{else}}
+    <div class="no-categories-message">
+      <span>Chưa có sách nào ở đây, đang chuẩn bị những cuốn sách thú vị cho bạn!</span>
+    </div>
+    {{/if}}
+
+  </div>
 </section>
 
 <section class="fun-section">
@@ -115,4 +120,3 @@
     </div>
   </div>
 </section>
-

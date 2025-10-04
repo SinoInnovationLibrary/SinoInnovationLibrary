@@ -20,16 +20,18 @@ class BookController {
                 });
             }
 
-            const relatedBooks = await Book.find({
-                categoryId: book.categoryId._id,
-                isPublic: true,
-                _id: { $ne: book._id }
-            })
-                .sort({ createdAt: -1 })
-                .limit(6)
-                .lean();
+            const relatedBooks = await Book.aggregate([
+                {
+                    $match: {
+                        categoryId: book.categoryId._id,
+                        isPublic: true,
+                        _id: { $ne: book._id }
+                    }
+                },
+                { $sample: { size: 6 } }
+            ]);
             res.render('pages/user/book-detail.page.hbs', {
-                title: book.title,
+                title: "Sino Innovation Library - " + book.title,
                 book,
                 relatedBooks
             });
@@ -73,7 +75,7 @@ class BookController {
                 .lean();
 
             const testBooks = Array(10).fill(books).flat();
-            
+
             return res.json({ books: testBooks });
         } catch (err) {
             console.error("Lỗi tìm kiếm:", err);

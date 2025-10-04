@@ -6,7 +6,7 @@ import {
     getBookById,
 } from '../api/books.api.js';
 
-class CategoriesPage {
+class BooksPage {
     constructor() {
         this.booksPage = document.querySelector('.books-page');
 
@@ -285,7 +285,7 @@ class CategoriesPage {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    new CategoriesPage();
+    new BooksPage();
 });
 
-export default CategoriesPage;
+export default BooksPage;

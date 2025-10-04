@@ -11,18 +11,14 @@ class HomeController {
             // Lấy tất cả category đang active
             const categories = await Category.find({ isPublic: true }).lean();
 
-            // Lấy sách cho từng category
+            // Lấy sách ngẫu nhiên cho từng category
             const categoriesWithBooks = await Promise.all(
                 categories.map(async (category) => {
-                    const books = await Book.find({
-                        categoryId: category._id,
-                        isPublic: true
-                    })
-                        .sort({ createdAt: -1 }) // ưu tiên sách mới nhất
-                        .limit(10)
-                        .lean();
+                    const books = await Book.aggregate([
+                        { $match: { categoryId: category._id, isPublic: true } },
+                        { $sample: { size: 10 } } // Lấy ngẫu nhiên 10 sách
+                    ]);
 
-                    // Nếu category không có sách thì return null
                     if (books.length === 0) return null;
 
                     return {
@@ -34,11 +30,10 @@ class HomeController {
 
             // Loại bỏ category null (không có sách)
             const filteredCategories = categoriesWithBooks.filter(c => c !== null);
-            const repeatedCategories = Array.from({ length: 10 }, () => filteredCategories).flat();
 
             res.render('pages/user/home.page.hbs', {
-                title: 'Home',
-                categories: repeatedCategories
+                title: 'Sino Innovation Library',
+                categories: filteredCategories
             });
         } catch (err) {
             console.error('Lỗi hiển thị trang thể loại:', err);

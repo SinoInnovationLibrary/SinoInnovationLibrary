@@ -50,14 +50,14 @@ class AuthController {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'Strict',
-                maxAge: COOKIE_MAX_AGE || 15 * 60 * 1000, // 15 phút
+                 maxAge: 1 * 60 * 60 * 1000, // 15 phút
             });
 
             res.cookie('refreshToken', refreshToken, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'Strict',
-                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 ngày
+                 maxAge: 1 * 60 * 60 * 1000, // 7 ngày
             });
             return res.status(200).json({
                 code: 200,

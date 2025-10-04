@@ -1,3 +1,6 @@
+{{> admin/header }}
+
+
 <div class="{{active}}-page admin-page">
     <div class="admin-page-header">
         <h1 class="admin-page-title">Quản lý sách</h1>
@@ -185,7 +188,7 @@
                                 style="max-width: 200px; display: none; border-radius: 16px;">
                         </div>
 
-{{!-- 
+                        {{!--
                         <div class="mb-3">
                             <label for="bookDescription" class="form-label">Mô tả</label>
                             <textarea class="form-control" id="bookDescription" name="description" rows="5"></textarea>
@@ -286,5 +289,28 @@
 
 
 </div>
+<script>
+    const searchInput = document.getElementById('search-input');
+    const searchBtn = document.getElementById('search-btn');
+
+    function performSearch() {
+        const query = searchInput.value.trim();
+        let url = '/admin/books';
+        if (query) {
+            url += '?search=' + encodeURIComponent(query);
+        }
+        window.location.href = url;
+    }
+
+    // Bắt Enter
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+
+    // Bắt click nút
+    searchBtn.addEventListener('click', performSearch);
+</script>
 
 <script type="module" src="/javascripts/module/{{active}}.module.js"></script>

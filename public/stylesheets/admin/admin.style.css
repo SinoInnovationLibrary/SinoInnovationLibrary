@@ -78,7 +78,22 @@ body {
     color: var(--color-accent);
 }
 
+.admin-sidebar .admin-nav {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.admin-sidebar .admin-nav .nav-logout {
+    height: fit-content;
+}
+
+.admin-sidebar .admin-nav .nav-logout a {
+    background-color: var(--color-error);
+}
+
 .admin-sidebar .admin-nav ul {
+    height: 100%;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -95,7 +110,7 @@ body {
     display: block;
 }
 
-.admin-sidebar .admin-nav ul li a.disabled{
+.admin-sidebar .admin-nav ul li a.disabled {
     background-color: var(--color-stroke-light);
     pointer-events: none;
     cursor: default;
@@ -178,6 +193,7 @@ body {
 .admin-layout .admin-table tbody tr:last-child td:last-child {
     border-bottom-right-radius: 12px;
 }
+
 .admin-layout .admin-table th.table-published-date,
 .admin-layout .admin-table td.table-published-date,
 .admin-layout .admin-table th.table-image,
@@ -250,6 +266,7 @@ body {
 .admin-layout .delete-btn i {
     color: var(--color-error);
 }
+
 /* END */
 
 /* ===== TOGGLE SWITCH ===== */
@@ -491,6 +508,7 @@ body {
     font-weight: 300;
     color: var(--color-text);
 }
+
 .form-select:focus,
 .form-control:focus {
     background-color: var(--color-surface);
@@ -498,6 +516,7 @@ body {
     box-shadow: none;
     border: 1px solid var(--color-stroke-light);
 }
+
 .modal-footer,
 .modal-header {
     border-color: var(--color-stroke-dark);
@@ -530,3 +549,78 @@ body {
 
 
 /* END */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CSS */
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    background-color: var(--color-primary);
+    color: white;
+    position: sticky;
+    border-radius: 31px;
+    top: 0;
+    z-index: 100;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+.site-header .header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.site-header .header-actions input {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--color-stroke-light);
+    background-color: var(--color-surface);
+    color: white;
+    outline: none;
+    border-radius: 19px 0 0 19px;
+    min-width: 360px;
+}
+
+.site-header .header-actions input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.site-header .header-actions button {
+    padding: 6px 16px 6px 12px;
+    border: none;
+    border: 1px solid var(--color-accent);
+    background-color: var(--color-accent);
+    color: white;
+    border-radius: 0 19px 19px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-header .header-actions button:hover {
+    background-color: #366edc;
+    /* slightly darker accent */
+}
+
+.site-header .header-actions i {
+    font-size: 1rem;
+}

@@ -7,6 +7,7 @@ var logger = require('morgan');
 const exphbs = require('express-handlebars');
 const helpers = require('./utils/hbsHelpers');
 const session = require('express-session');
+const rateLimit = require('express-rate-limit');
 
 var adminRouter = require('./routes/admin/index');
 var authRouter = require('./routes/auth/index');
@@ -16,9 +17,20 @@ const connectDB = require('./config/ConnectDB');
 const { api } = require('./config/cloudinary');
 connectDB();
 
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 phút
+  max: 500, // mỗi IP tối đa 100 request trong 15 phút
+  message: {
+    code: 429,
+    message: 'Too many requests, please try again later.'
+  },
+  standardHeaders: true, // trả header rate-limit
+  legacyHeaders: false,
+});
 
 
 var app = express();
+app.use(apiLimiter);
 
 // view engine setup
 
