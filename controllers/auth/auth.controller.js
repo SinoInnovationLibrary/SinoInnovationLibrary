@@ -35,9 +35,10 @@ class AuthController {
                 password !== ADMIN_PASSWORD;
 
             if (invalidLogin) {
-                return error(res, {
-                    code: 'LOGIN_FAILED',
+                return res.status(400).json({
+                    code: 400,
                     message: 'Tên đăng nhập hoặc mật khẩu không đúng.',
+                    data: null
                 });
             }
 
@@ -50,14 +51,14 @@ class AuthController {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'Strict',
-                 maxAge: 1 * 60 * 60 * 1000, // 15 phút
+                maxAge: 1 * 60 * 60 * 1000, // 15 phút
             });
 
             res.cookie('refreshToken', refreshToken, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'Strict',
-                 maxAge: 1 * 60 * 60 * 1000, // 7 ngày
+                maxAge: 1 * 60 * 60 * 1000, // 7 ngày
             });
             return res.status(200).json({
                 code: 200,

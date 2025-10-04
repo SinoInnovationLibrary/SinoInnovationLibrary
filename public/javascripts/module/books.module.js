@@ -60,7 +60,7 @@ class BooksPage {
             const deleteBtn = e.target.closest('.delete-btn');
             if (deleteBtn) {
                 const id = deleteBtn.dataset.id;
-                this.handleDeleteCategory(id);
+                this.handleDeleteBook(id);
             }
         });
 
